@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Petualangan Pancasila - Kelas 6</title>
+<style>
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{height:100%;background:#0b3d2e;overflow:hidden;font-family:"Segoe UI",Arial,sans-serif}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0;background:linear-gradient(160deg,#fff8e1,#e3f6ff);overflow:hidden;color:#12263a}
+header{height:80px;background:#c62828;color:#fff;display:flex;align-items:center;padding:0 30px;gap:24px;font-size:30px;font-weight:800}
+header .bar{flex:1;height:22px;background:#ffffff44;border-radius:12px;overflow:hidden}
+header .bar i{display:block;height:100%;background:#ffd600;width:0;transition:width .4s}
+header .chip{background:#fff;color:#c62828;padding:6px 20px;border-radius:30px}
+#main{position:absolute;top:80px;left:0;right:0;bottom:44px;padding:20px 50px}
+.sec{font-size:26px;font-weight:800;color:#c62828;margin-bottom:8px}
+.q{font-size:38px;font-weight:800;line-height:1.3;background:#fff;border:4px solid #12263a;border-radius:24px;padding:20px 30px;box-shadow:0 6px 0 #12263a}
+.q.sm{font-size:30px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.opt,.btn{font:inherit;font-size:30px;font-weight:700;text-align:left;background:#fff;border:4px solid #1565c0;color:#12263a;border-radius:20px;padding:16px 24px;min-height:100px;cursor:pointer;box-shadow:0 5px 0 #1565c0;display:flex;align-items:center;gap:16px}
+.opt b{background:#1565c0;color:#fff;border-radius:50%;min-width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.opt.on{background:#fff3b0;border-color:#f57f17;box-shadow:0 5px 0 #f57f17}
+.opt.ok{background:#c8f7c5;border-color:#2e7d32;box-shadow:0 5px 0 #2e7d32}
+.opt.no{background:#ffd0d0;border-color:#c62828;box-shadow:0 5px 0 #c62828}
+.btn{justify-content:center;text-align:center;background:#2e7d32;color:#fff;border-color:#1b5e20;box-shadow:0 5px 0 #1b5e20;min-height:80px;padding:12px 40px;font-size:32px}
+.btn.alt{background:#f57f17;border-color:#bf360c;box-shadow:0 5px 0 #bf360c}
+.btn:active,.opt:active{transform:translateY(4px)}
+.row{display:grid;grid-template-columns:1fr 210px 210px;gap:12px;align-items:center;margin-top:14px;font-size:28px;font-weight:700}
+.row .opt{min-height:70px;justify-content:center;font-size:28px;padding:8px}
+.row .opt.ok{}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:20px}
+.mt .opt{font-size:28px;min-height:96px;margin-bottom:14px}
+.act{position:absolute;right:50px;bottom:14px;display:flex;gap:16px}
+#fb{position:absolute;left:50px;right:50px;bottom:14px;background:#fff;border:5px solid #2e7d32;border-radius:24px;padding:16px 28px;display:none;font-size:27px;font-weight:600;line-height:1.35;box-shadow:0 8px 30px #0005;z-index:5}
+#fb.bad{border-color:#c62828}
+#fb h3{font-size:36px;margin-bottom:6px}
+#fb .btn{position:absolute;right:24px;top:-52px}
+.key{background:#e8f5e9;border:3px dashed #2e7d32;border-radius:18px;padding:16px 24px;margin-top:20px;font-size:29px;font-weight:600;line-height:1.35}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;gap:22px}
+.center h1{font-size:88px;color:#c62828;line-height:1.05;text-shadow:0 4px 0 #ffd600}
+.center p{font-size:34px;font-weight:600;max-width:1200px}
+.star{font-size:110px;letter-spacing:10px}
+.sila{display:flex;gap:14px}.sila span{background:#fff;border:4px solid #12263a;border-radius:50%;width:84px;height:84px;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:900}
+footer{position:absolute;bottom:0;left:0;right:0;height:44px;background:#12263a;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 30px;font-size:22px}
+footer b{color:#ffd600;font-size:26px;letter-spacing:1px}
+#wm{position:absolute;inset:80px 0 44px;pointer-events:none;z-index:9;display:flex;align-items:center;justify-content:center;font-size:150px;font-weight:900;color:#12263a12;transform:rotate(-18deg);white-space:nowrap}
+#fs{position:fixed;right:8px;top:8px;z-index:20;background:#ffffffcc;border:0;border-radius:10px;font-size:20px;padding:6px 12px;cursor:pointer}
+</style></head><body>
+<button id="fs" onclick="document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()">⛶ Layar Penuh</button>
+<div id="stage">
+<header><span>🦅 Petualangan Pancasila</span><div class="bar"><i id="pb"></i></div><span class="chip" id="no">Soal 0/28</span><span class="chip">⭐ <span id="sc">0</span></span><span class="chip" id="st">🔥 0</span></header>
+<div id="main"></div><div id="wm">Riski Hermawan</div>
+<footer><span>Asesmen Sumatif Bab 1 &amp; 2 • Pendidikan Pancasila Kelas 6A</span><b>© Riski Hermawan</b></footer>
+</div>
+<script>
+const SEC={0:"BAGIAN A • PILIHAN GANDA",10:"BAGIAN B • PILIH JAWABAN YANG BENAR / BENAR-SALAH / PASANGKAN",15:"BAGIAN C • PENERAPAN — Pikirkan jawabanmu, lalu buka kunci!",20:"BAGIAN D • PENALARAN (HOTS)",25:"BAGIAN E • URAIAN & REFLEKSI"};
+const mc=(q,o,a,e)=>({t:"mc",q,o,a,e});
+const Q=[
+mc("Bung Hatta menyatakan lima sila Pancasila adalah satu kesatuan yang tidak dapat dipisahkan. Maknanya adalah …",["Sila pertama satu-satunya sila yang wajib dihayati.","Kelima sila berdiri sendiri-sendiri sesuai keinginan warga.","Hubungan antarsila sangat erat, berkait-kaitan, dan saling berangkaian.","Sila kelima dapat dilaksanakan tanpa memperhatikan sila lain."],2,"Lima sila merupakan satu kesatuan bulat yang erat berkait-kaitan."),
+mc("Dalam sidang BPUPK, Ir. Sukarno menegaskan bahwa nilai-nilai Pancasila …",["Diambil dari aturan hukum negara luar.","Digali langsung dari praktik hidup bangsa Indonesia sehari-hari.","Dibuat hanya untuk upacara bendera.","Disusun tanpa memperhatikan kebiasaan masyarakat."],1,"Pancasila digali dari kehidupan bangsa Indonesia sendiri."),
+mc("Pancasila ada di Pembukaan UUD NRI 1945 alinea keempat sebagai Dasar Negara. Artinya Pancasila adalah …",["Pedoman perilaku siswa di rumah.","Cita-cita pribadi setiap warga.","Sumber dari segala sumber hukum negara Indonesia.","Satu-satunya bahan hafalan di sekolah."],2,"Dasar Negara berarti sumber dari segala sumber hukum."),
+mc("Pancasila sebagai Pandangan Hidup Bangsa berfungsi sebagai …",["Aturan hukum tertulis yang memuat sanksi pidana.","Pedoman dan petunjuk bagi masyarakat dalam bersikap dan berperilaku sehari-hari.","Landasan pendaftaran organisasi kemasyarakatan.","Dokumen sejarah yang disimpan di museum."],1,"Pandangan hidup = pedoman perilaku warga sehari-hari."),
+mc("Pengamalan Sila Ketuhanan tidak hanya beribadah dan menghormati agama lain, tetapi juga menjadi dasar untuk …",["Menjunjung tinggi nilai kemanusiaan dan membangun persatuan.","Memaksa orang lain mengikuti keyakinan kita.","Mengabaikan aturan musyawarah di sekolah.","Membeda-bedakan teman berdasarkan status sosial."],0,"Sila 1 menjiwai Sila 2–5: iman menuntun kita memuliakan manusia dan menjaga persatuan."),
+mc("Sedi dan Bonar memakai Bahasa Indonesia saat kerja kelompok dengan teman berbagai suku. Ini pengamalan Sila …",["Ketuhanan Yang Maha Esa.","Kemanusiaan yang Adil dan Beradab.","Persatuan Indonesia.","Keadilan Sosial bagi Seluruh Rakyat Indonesia."],2,"Bahasa Indonesia adalah bahasa pemersatu — Sila 3."),
+mc("Memey dan Indi menyisihkan sebagian uang saku untuk ditabung. Sikap ini mencerminkan Sila …",["Pertama.","Kedua.","Keempat.","Kelima."],3,"Hemat, tidak bergaya hidup mewah, dan menabung adalah pengamalan Sila 5."),
+mc("Manda tetap berteman akrab dengan Anisa yang difabel dan berkata menyayangi sesama ciptaan Tuhan adalah bukti menghormati Sang Pencipta. Ini menunjukkan keterhubungan …",["Sila Pertama dan Sila Kedua.","Sila Kedua dan Sila Keempat.","Sila Ketiga dan Sila Kelima.","Sila Keempat dan Sila Kelima."],0,"Menyayangi ciptaan Tuhan (Sila 1) menuntun memuliakan sesama (Sila 2)."),
+mc("Pendapat Bonar (ketua musyawarah) tidak dipilih; pendapat Indi yang disepakati. Sikap Bonar seharusnya …",["Menolak hasil dan keluar kelas.","Menerima dan melaksanakan keputusan bersama dengan ikhlas dan bertanggung jawab.","Pura-pura setuju tetapi tidak mengerjakan tugas.","Membuat kelompok tandingan."],1,"Menerima keputusan musyawarah dengan ikhlas adalah pengamalan Sila 4."),
+mc("Siswa MI di Kediri menggalang dana dan berdoa bersama untuk korban gempa Cianjur. Ini pengamalan Sila …",["Ketuhanan Yang Maha Esa.","Kemanusiaan yang Adil dan Beradab.","Persatuan Indonesia.","Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan."],1,"Peduli dan membantu korban bencana = Sila 2."),
+{t:"tf",q:"Benar atau Salah? Tentang kedudukan Pancasila:",s:["Pancasila sebagai Dasar Negara adalah sumber dari segala sumber hukum di Indonesia.","Pandangan Hidup Bangsa berarti Pancasila hanya berlaku saat upacara bendera hari Senin.","Ideologi Negara berarti nilai Pancasila menjadi cita-cita normatif dalam penyelenggaraan negara."],a:[1,0,1],e:"Pernyataan 1 BENAR, 2 SALAH (Pancasila dipakai setiap hari), 3 BENAR."},
+{t:"mm",q:"Pilih DUA tindakan yang membuktikan iman kepada Tuhan (Sila 1) mendorong kita berbuat baik dan menjaga persatuan (Sila 2 & 3)!",o:["Manda menyayangi Anisa yang difabel karena meyakini Anisa sesama ciptaan Tuhan.","Sedi hanya berteman dengan anak yang seagama dan sedaerah.","Bonar dan kawan-kawan berdoa bersama sebelum musyawarah pembagian tugas kelas.","Dewita menolak bermain dengan teman yang tidak membawa barang mewah."],a:[0,2],e:"Jawaban benar: A dan C."},
+{t:"tf",q:"Benar atau Salah? Tentang pengamalan Sila Ketiga:",s:["Menggunakan Bahasa Indonesia dengan baik dan benar adalah wujud ikrar Sumpah Pemuda 1928.","Siswa boleh mengejek bahasa daerah teman yang terdengar asing.","Mengutamakan kepentingan bersama di atas kepentingan pribadi adalah pengamalan Sila Ketiga."],a:[1,0,1],e:"Pernyataan 1 BENAR, 2 SALAH (kita harus menghargai bahasa daerah), 3 BENAR."},
+{t:"mm",q:"Pilih DUA perilaku yang TIDAK SESUAI dengan nilai permusyawaratan (Sila Keempat)!",o:["Memotong pembicaraan teman saat menyampaikan pendapat.","Mendengarkan dengan tenang saat orang lain memberi usulan.","Memaksa seluruh anggota kelompok menyetujui pendapat pribadi.","Menerima hasil musyawarah meskipun usulan kita tidak terpilih."],a:[0,2],e:"Yang tidak sesuai: A dan C."},
+{t:"mt",q:"Pasangkan Sila dengan contoh tindakan yang sesuai! Sentuh sila di kiri, lalu contoh di kanan.",l:["Sila Pertama","Sila Ketiga","Sila Kelima"],r:["Menyisihkan uang saku untuk ditabung","Berdoa sebelum belajar di sekolah","Berkomunikasi dengan Bahasa Indonesia saat kerja kelompok"],a:[1,2,0],e:"Sila 1 – berdoa; Sila 3 – Bahasa Indonesia; Sila 5 – menabung."},
+{t:"op",q:"Temanmu yang pemalu diejek dan dijauhi karena pakaiannya sederhana. Tindakan nyata apa yang kamu lakukan sebagai pengamalan Sila Kedua?",k:"Mengajak teman baru itu bermain bersama dengan ramah dan menegur teman yang mengejek agar tidak melakukan perundungan (Sila 2)."},
+{t:"op",q:"Di kelompok belajar, ada teman yang belum lancar berbahasa Indonesia dan sering memakai bahasa daerah. Bagaimana caramu menerapkan Sila Ketiga?",k:"Membantunya memahami materi dengan sabar dan bahasa sopan, melatihnya berbahasa Indonesia tanpa mengejek bahasa daerahnya (Sila 3)."},
+{t:"op",q:"Saat musyawarah, Sedi mengusulkan pembagian tugas membawa alat kebersihan dilakukan adil tanpa memandang jauh-dekat rumah. Mengapa usulan itu penting disepakati?",k:"Agar pembagian tugas adil, semua merasa dihargai, tidak ada yang merasa terbebani, sehingga kerja bakti lancar (Sila 4 & 5)."},
+{t:"op",q:"Hari Minggu sore kamu bermain bola di lapangan dekat rumah. Saat waktu ibadah tetanggamu tiba, tindakan apa yang paling tepat?",k:"Menghentikan atau memindahkan tempat bermain agar tidak mengganggu ketenangan ibadah tetangga (Sila 1 & 3)."},
+{t:"op",q:"Tuliskan DUA contoh kewajibanmu di rumah agar hak dan kewajiban seimbang!",k:"Merapikan kamar / membantu orang tua, dan belajar dengan sungguh-sungguh (Sila 5)."},
+{t:"op",q:"Seorang anak rajin beribadah tetapi suka mengejek dan membeda-bedakan teman. Apakah sikapnya sudah sesuai Sila 1? Jelaskan hubungannya dengan sila lain!",k:"Belum utuh. Sila 1 menjiwai Sila 2 & 3. Rajin beribadah tetapi mengejek dan membeda-bedakan teman berarti belum mengamalkan keimanan dalam perilaku nyata."},
+{t:"op",q:"Sedi takut ke rumah Pigey karena ada anjing. Bonar berkata, “Kita bekerja sama dengan Pigey, bukan anjingnya.” Mengapa sikap Bonar penting bagi persatuan? Nilai Pancasila apa yang diterapkan?",k:"Bonar memisahkan rasa takut pribadi dari tujuan kelompok. Kelompok tetap bersatu (Sila 3), adil (Sila 5), dan menaati kesepakatan bersama (Sila 4)."},
+{t:"op",q:"Bonar mengumpulkan karya buatan bibinya sebagai tugas kelompok, lalu Pigey jujur kepada guru. Mengapa tindakan Bonar salah? Apa pelajaran tentang kejujuran?",k:"Bonar melanggar kejujuran dan tanggung jawab. Kejujuran menjaga integritas, sedangkan ketidakjujuran merusak kepercayaan."},
+{t:"op",q:"Pemerintah membuat aturan melarang bullying. Siswa SD Persahabatan saling menyayangi dan membantu. Mana yang menunjukkan Pancasila sebagai Dasar Negara, mana sebagai Pandangan Hidup?",k:"Undang-undang/aturan larangan bullying = Dasar Negara (sumber hukum). Perilaku siswa yang saling menyayangi = Pandangan Hidup Bangsa (pedoman sehari-hari)."},
+{t:"op",q:"Warga dua suku berbeda salah paham karena cara berbicara berbeda. Sebagai Ketua RT, apa yang kamu lakukan berdasarkan nilai Pancasila?",k:"Mengadakan musyawarah warga (Sila 4), mengajak saling toleran (Sila 2 & 3), dan mengadakan gotong royong atau festival budaya bersama."},
+{t:"op",q:"Uraikan bagaimana iman kepada Tuhan (Sila 1) menuntun pelajar bersikap adil dan tidak membeda-bedakan teman (Sila 5) saat belajar maupun bermain!",k:"Iman menyadarkan bahwa semua manusia bernilai mulia. Karena itu pelajar bersikap adil (Sila 5) dan tidak membeda-bedakan teman saat belajar maupun bermain."},
+{t:"op",q:"Jelaskan perbedaan tiga kedudukan Pancasila: Dasar Negara, Pandangan Hidup Bangsa, dan Ideologi Negara — beserta contoh penerapannya!",k:"• Dasar Negara = sumber hukum negara (contoh: UU/peraturan).\n• Pandangan Hidup = pedoman perilaku harian (contoh: gotong royong, menabung).\n• Ideologi Negara = cita-cita bernegara (contoh: layanan pendidikan & kesehatan merata)."},
+{t:"op",q:"Rencana Komitmen Pribadi: tulis DUA sikap yang ingin kamu perbaiki — satu di rumah, satu di sekolah — beserta tindakan nyata dan sila Pancasilanya!",k:"Jawabanmu bebas dan jujur, sesuai refleksi dirimu. Contoh: di rumah – membantu orang tua tiap hari (Sila 5); di sekolah – mendengarkan pendapat teman saat diskusi (Sila 4)."}
+];
+let i=0,score=0,streak=0,locked=false,sel=[],tfv=[],mp={},pick=null,right=0;
+const $=id=>document.getElementById(id),M=$("main"),L="ABCD",PAL=["#1565c0","#ef6c00","#2e7d32"];
+const esc=s=>s.replace(/\n/g,"<br>");
+function hud(){$("sc").textContent=score;$("st").textContent="🔥 "+streak;$("no").textContent="Soal "+Math.min(i+1,28)+"/28";$("pb").style.width=(i/28*100)+"%"}
+function start(){i=0;score=0;streak=0;right=0;show()}
+function home(){hud();M.innerHTML=`<div class="center"><div class="sila"><span>⭐</span><span>⛓️</span><span>🌳</span><span>🐃</span><span>🌾</span></div><h1>Petualangan<br>Pancasila</h1><p>Asesmen Sumatif Bab 1 &amp; 2 • Kelas 6A<br>28 tantangan seru! Sentuh jawaban yang benar, kumpulkan bintang, dan jadilah Pahlawan Pancasila!</p><button class="btn" style="font-size:44px;min-height:110px" onclick="start()">▶ MULAI BERMAIN</button></div>`}
+function show(){const q=Q[i];locked=false;sel=[];tfv=(q.s||[]).map(()=>null);mp={};pick=null;hud();
+let h="";if(SEC[i]!==undefined)h+=`<div class="sec">${SEC[i]}</div>`;else h+=`<div class="sec">${SEC[Object.keys(SEC).filter(k=>k<=i).pop()]}</div>`;
+h+=`<div class="q ${q.q.length>150?"sm":""}">${i+1}. ${q.q}</div><div id="body"></div><div id="fb"></div>`;M.innerHTML=h;body()}
+function body(){const q=Q[i],b=$("body");let h="";
+if(q.t=="mc"||q.t=="mm"){h=`<div class="opts">`+q.o.map((o,k)=>`<button class="opt ${sel.includes(k)?"on":""}" onclick="tap(${k})"><b>${L[k]}</b>${o}</button>`).join("")+`</div>`;if(q.t=="mm")h+=`<div class="act"><button class="btn" onclick="chk()">✔ Periksa</button></div>`}
+if(q.t=="tf"){h=`<div style="margin-top:8px">`+q.s.map((s,k)=>`<div class="row"><div class="q sm" style="box-shadow:none;padding:12px 18px;font-size:27px">${k+1}) ${s}</div><button class="opt ${tfv[k]===1?"on":""}" onclick="tv(${k},1)">✔ BENAR</button><button class="opt ${tfv[k]===0?"on":""}" onclick="tv(${k},0)">✘ SALAH</button></div>`).join("")+`</div><div class="act"><button class="btn" onclick="chk()">✔ Periksa</button></div>`}
+if(q.t=="mt"){const cl=k=>{const r=Object.keys(mp).find(x=>mp[x]==k);return r===undefined?"":`style="border-color:${PAL[r]};box-shadow:0 5px 0 ${PAL[r]};background:${PAL[r]}22"`};
+h=`<div class="mt"><div>`+q.l.map((s,k)=>`<button class="opt ${pick===k?"on":""}" ${mp[k]!==undefined?`style="border-color:${PAL[k]};background:${PAL[k]}22;box-shadow:0 5px 0 ${PAL[k]}"`:""} onclick="mtL(${k})"><b style="background:${PAL[k]}">${k+1}</b>${s}</button>`).join("")+`</div><div>`+q.r.map((s,k)=>`<button class="opt" ${cl(k)} onclick="mtR(${k})"><b style="background:#555">${"abc"[k]}</b>${s}</button>`).join("")+`</div></div><div class="act"><button class="btn" onclick="chk()">✔ Periksa</button></div>`}
+if(q.t=="op"){h=`<div class="key" style="background:#fffde7;border-color:#f9a825">🤔 Pikirkan atau diskusikan jawabanmu bersama teman, lalu sentuh tombol untuk melihat kunci jawaban.</div><div class="act"><button class="btn alt" id="rv" onclick="reveal()">🔑 Buka Kunci Jawaban</button></div>`}
+b.innerHTML=h}
+function tap(k){if(locked)return;const q=Q[i];if(q.t=="mc"){locked=true;const bs=document.querySelectorAll(".opt");bs[q.a].classList.add("ok");if(k!=q.a)bs[k].classList.add("no");done(k==q.a,10,q.e)}else{sel=sel.includes(k)?sel.filter(x=>x!=k):sel.length<2?[...sel,k]:[sel[1],k];body()}}
+function tv(k,v){if(locked)return;tfv[k]=v;body()}
+function mtL(k){if(locked)return;pick=k;body()}
+function mtR(k){if(locked||pick===null)return;Object.keys(mp).forEach(x=>{if(mp[x]==k)delete mp[x]});mp[pick]=k;pick=null;body()}
+function chk(){if(locked)return;const q=Q[i];let ok=false;
+if(q.t=="mm"){if(sel.length<2)return alert("Pilih 2 jawaban dulu ya!");ok=q.a.every(x=>sel.includes(x));const bs=document.querySelectorAll(".opt");q.a.forEach(x=>bs[x].classList.add("ok"));sel.filter(x=>!q.a.includes(x)).forEach(x=>bs[x].classList.add("no"))}
+if(q.t=="tf"){if(tfv.includes(null))return alert("Jawab semua pernyataan dulu ya!");ok=tfv.every((v,k)=>v==q.a[k]);const bs=document.querySelectorAll(".row .opt");q.a.forEach((a,k)=>{bs[k*2+(a?0:1)].classList.add("ok");if(tfv[k]!=a)bs[k*2+(tfv[k]?0:1)].classList.add("no")})}
+if(q.t=="mt"){if(Object.keys(mp).length<3)return alert("Pasangkan semuanya dulu ya!");ok=q.a.every((a,k)=>mp[k]==a)}
+locked=true;done(ok,20,q.e)}
+function reveal(){if(locked)return;locked=true;$("rv").style.display="none";$("body").innerHTML=`<div class="key">🔑 <b>Kunci Jawaban:</b><br>${esc(Q[i].k)}</div><div class="key" style="background:#fffde7;border-color:#f9a825;text-align:center">Bagaimana jawabanmu tadi?<br><br><button class="btn" onclick="self(1)">😄 Sudah Sesuai / Paham</button> &nbsp; <button class="btn alt" onclick="self(0)">📖 Perlu Belajar Lagi</button></div>`}
+function self(ok){if(ok){score+=10;streak++;right++}else streak=0;hud();next()}
+function done(ok,pts,e){if(ok){score+=pts+streak*2;streak++;right++}else streak=0;hud();const f=$("fb");f.className=ok?"":"bad";f.style.display="block";f.innerHTML=`<h3>${ok?"🎉 Hebat! Jawabanmu benar!":"💪 Belum tepat, ayo belajar!"}</h3>${e}<button class="btn" onclick="next()">Lanjut ➜</button>`}
+function next(){i++;if(i>=28)end();else show()}
+function end(){i=28;hud();const p=right,t=p>=22?"🏆 PAHLAWAN PANCASILA":p>=15?"🥇 DUTA PANCASILA":"🌱 PEJUANG PANCASILA";const s=p>=22?"⭐⭐⭐":p>=15?"⭐⭐":"⭐";
+M.innerHTML=`<div class="center"><div class="star">${s}</div><h1 style="font-size:70px">${t}</h1><p>Skor akhir: <b>${score}</b> poin<br>Jawaban tepat / paham: <b>${p}</b> dari 28 soal<br>Ingat: kelima sila saling berkaitan — amalkan Pancasila setiap hari!</p><button class="btn" onclick="start()">🔄 Main Lagi</button></div>`}
+function fit(){const s=Math.min(innerWidth/1600,innerHeight/900),st=$("stage");st.style.transform=`scale(${s}) translate(-50%,-50%)`;st.style.transformOrigin="0 0";st.style.left="50%";st.style.top="50%";st.style.marginLeft="0"}
+addEventListener("resize",fit);fit();home();
+</script></body></html>
